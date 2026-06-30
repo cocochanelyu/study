@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI駆動開発 進行手順書 印刷用 (v2.2)</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Noto+Sans+JP:wght@400;700&display=swap');
+
+        :root {
+            --primary-color: #2563eb;
+            --text-color: #1f2937;
+            --bg-color: #ffffff;
+            --border-color: #e5e7eb;
+            --code-bg: #f3f4f6;
+        }
+
+        body {
+            font-family: 'Inter', 'Noto Sans JP', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 40px;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            color: var(--text-color);
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.3em;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            text-align: center;
+            border-bottom: none;
+            margin-bottom: 1.5em;
+        }
+
+        h2 {
+            font-size: 1.8em;
+            background-color: #f9fafb;
+            padding: 0.5em;
+            border-left: 5px solid var(--primary-color);
+        }
+
+        h3 {
+            font-size: 1.4em;
+        }
+
+        blockquote {
+            margin: 1.5em 0;
+            padding: 1em;
+            background-color: #f8fafc;
+            border-left: 4px solid #64748b;
+            font-style: normal;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5em 0;
+            font-size: 0.95em;
+        }
+
+        th,
+        td {
+            border: 1px solid var(--border-color);
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f9fafb;
+            font-weight: bold;
+        }
+
+        pre {
+            background-color: var(--code-bg);
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9em;
+            border: 1px solid var(--border-color);
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            margin: 1em 0;
+        }
+
+        code {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: var(--code-bg);
+            padding: 2px 4px;
+            border-radius: 4px;
+        }
+
+        .alert {
+            padding: 15px;
+            margin: 1.5em 0;
+            border-radius: 8px;
+            border: 1px solid transparent;
+        }
+
+        .alert-tip {
+            background-color: #f0fdf4;
+            border-color: #bbf7d0;
+            color: #166534;
+        }
+
+        .alert-important {
+            background-color: #fffaf0;
+            border-color: #fbd38d;
+            color: #9c4221;
+        }
+
+        .alert-note {
+            background-color: #f0f9ff;
+            border-color: #bae6fd;
+            color: #075985;
+        }
+
+        .alert-caution {
+            background-color: #fef2f2;
+            border-color: #fecaca;
+            color: #991b1b;
+        }
+
+        hr {
+            border: 0;
+            border-top: 1px solid var(--border-color);
+            margin: 2.5em 0;
+        }
+
+        .checklist-container {
+            background-color: #f9fafb;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .checklist-container h3 {
+            margin-top: 1em;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .checklist-item {
+            margin: 8px 0;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .checklist-box {
+            margin-right: 10px;
+            margin-top: 4px;
+        }
+
+        /* 印刷用設定 */
+        @media print {
+            body {
+                padding: 0;
+                font-size: 11pt;
+            }
+
+            h2,
+            h3 {
+                page-break-after: avoid;
+            }
+
+            tr {
+                page-break-inside: avoid;
+            }
+
+            pre {
+                page-break-inside: avoid;
+            }
+
+            .no-print {
+                display: none;
+            }
+
+            blockquote,
+            .alert {
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>🚀 AI駆動開発 進行手順書（改訂版）</h1>
+
+    <div style="text-align: center; margin-bottom: 2em;">
+        <p><strong>対象者:</strong> 非エンジニア向け</p>
+        <p><strong>目的:</strong> AIを活用した個人開発をスムーズに進めるためのガイド</p>
+        <p><strong>バージョン:</strong> 2.2</p>
+    </div>
+
+    <hr>
+
+    <h2>📋 全体フロー</h2>
+
+    <pre>リサーチ → 要件定義（初稿） → マージ・レビュー → 清書 → 実装計画 → 計画チェック → 実装 → テスト</pre>
+
+    <table>
+        <thead>
+            <tr>
+                <th>フェーズ</th>
+                <th>推奨AI</th>
+                <th>役割</th>
+                <th>所要時間目安</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1. リサーチ</td>
+                <td><strong>Perplexity + Grok</strong></td>
+                <td>情報収集・実現可能性確認</td>
+                <td>30分〜1時間</td>
+            </tr>
+            <tr>
+                <td>2. 要件定義（初稿）</td>
+                <td><strong>Perplexity + Grok</strong></td>
+                <td>2つのAIで初稿を作成</td>
+                <td>30分〜1時間</td>
+            </tr>
+            <tr>
+                <td>3. マージ・レビュー</td>
+                <td><strong>Claude Opus 4.5</strong></td>
+                <td>2つの初稿を比較・統合</td>
+                <td>30分〜1時間</td>
+            </tr>
+            <tr>
+                <td>4. 清書</td>
+                <td><strong>Claude Opus 4.5</strong></td>
+                <td>設計書の完成版を作成</td>
+                <td>1時間</td>
+            </tr>
+            <tr>
+                <td>5. 実装計画</td>
+                <td><strong>Claude Opus 4.5</strong></td>
+                <td>タスク分割・計画書作成</td>
+                <td>1〜2時間</td>
+            </tr>
+            <tr>
+                <td>6. 計画チェック</td>
+                <td><strong>GPT-5.2-Codex</strong></td>
+                <td>成功率チェック・抜け漏れ確認</td>
+                <td>30分</td>
+            </tr>
+            <tr>
+                <td>7. 実装</td>
+                <td><strong>Claude Opus 4.5</strong></td>
+                <td>コード実装</td>
+                <td>数時間〜数日</td>
+            </tr>
+            <tr>
+                <td>8. テスト・バグ取り</td>
+                <td><strong>GPT-5.2-Codex</strong></td>
+                <td>デバッグ・動作確認</td>
+                <td>1〜2時間</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>🎯 AIの役割分担</h3>
+
+    <pre>
+┌─────────────────────────────────────────────────────────┐
+│  リサーチ用                                            │
+│  ├─ Perplexity        │ 検索能力が高い、技術ブログ参照 │
+│  └─ Grok              │ X投稿から実例を拾う            │
+├─────────────────────────────────────────────────────────┤
+│  下準備・実装の主担当                                  │
+│  └─ Claude Opus 4.5   │ 要件定義・マージ・清書・実装   │
+├─────────────────────────────────────────────────────────┤
+│  レビュー・品質チェック                                │
+│  └─ GPT-5.2-Codex     │ 成功率チェック、抜け漏れ確認   │
+└─────────────────────────────────────────────────────────┘</pre>
+
+    <hr>
+
+    <h2>📁 プロジェクトフォルダ構成</h2>
+
+    <pre>
+プロジェクト名/
+├── docs/                    # ドキュメント
+│   ├── 01_リサーチ結果.md
+│   ├── 02_要件定義書.md
+│   ├── 03_アーキテクチャ.md
+│   ├── 04_技術スタック.md
+│   └── 05_実装計画書.md
+├── src/                     # ソースコード
+└── README.md</pre>
+
+    <hr>
+
+    <h2>📖 用語集（非エンジニア向け）</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>用語</th>
+                <th>意味</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>要件定義</strong></td>
+                <td>「何を作るか」を明確にすること</td>
+            </tr>
+            <tr>
+                <td><strong>アーキテクチャ</strong></td>
+                <td>システムの設計図・構成</td>
+            </tr>
+            <tr>
+                <td><strong>技術スタック</strong></td>
+                <td>使用するプログラミング言語やツールの一覧</td>
+            </tr>
+            <tr>
+                <td><strong>API</strong></td>
+                <td>ソフトウェア同士を繋ぐ仕組み</td>
+            </tr>
+            <tr>
+                <td><strong>フロントエンド</strong></td>
+                <td>画面・見た目の部分</td>
+            </tr>
+            <tr>
+                <td><strong>バックエンド</strong></td>
+                <td>裏側の処理・データ管理の部分</td>
+            </tr>
+            <tr>
+                <td><strong>デプロイ</strong></td>
+                <td>作ったものを公開・使える状態にすること</td>
+            </tr>
+            <tr>
+                <td><strong>MVP</strong></td>
+                <td>最小限の機能で動くバージョン（Minimum Viable Product）</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <hr>
+
+    <h2>フェーズ1️⃣ リサーチ</h2>
+
+    <h3>目的</h3>
+    <p>開発したいアイデアが技術的に実現可能かを調査し、Go/Noを判断する</p>
+
+    <h3>推奨AI</h3>
+    <ul>
+        <li><strong>Perplexity</strong>: 検索能力が高く、技術ブログなど様々なソースを参照</li>
+        <li><strong>Grok</strong>: Xの投稿から実際に実装している人の事例を拾ってくれる</li>
+    </ul>
+
+    <h3>手順</h3>
+    <p>1. <strong>両方のAIに同じ質問をする</strong></p>
+    <ul>
+        <li>PerplexityとGrokの両方に同じ質問をして、回答を比較・マージする</li>
+    </ul>
+
+    <p>2. <strong>質問テンプレート</strong></p>
+    <pre>
+以下のアイデアは技術的に実現可能ですか？
+
+【開発したい内容】
+（ここにアイデアを記載）
+
+【確認したいこと】
+- 実現可能性（可能/困難/不可能）
+- 必要な技術スタック
+- 想定される難易度（初心者/中級/上級）
+- 開発期間の目安
+- 類似サービスの有無
+- AI駆動開発で実現できるか
+- 無料でできるか（APIの料金等）
+- 非エンジニアがスクリプトを実装する難易度</pre>
+
+    <h3>Go/No 判断基準</h3>
+
+    <table>
+        <thead>
+            <tr>
+                <th>判断</th>
+                <th>条件</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>✅ <strong>Go</strong></td>
+                <td>両AIが「実現可能」と回答、難易度が初心者〜中級</td>
+            </tr>
+            <tr>
+                <td>⚠️ <strong>要検討</strong></td>
+                <td>意見が分かれる、または難易度が高い場合</td>
+            </tr>
+            <tr>
+                <td>❌ <strong>No</strong></td>
+                <td>両AIが「困難/不可能」と回答</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <hr>
+
+    <h2>フェーズ2️⃣ 要件定義の初稿作成</h2>
+
+    <h3>目的</h3>
+    <p>複数のAIから要件定義の初稿を取得し、比較材料を準備する</p>
+
+    <h3>推奨AI</h3>
+    <ul>
+        <li><strong>Perplexity</strong> と <strong>Grok</strong> の両方</li>
+    </ul>
+
+    <h3>手順</h3>
+    <p>1. <strong>両方のAIに要件定義を依頼</strong></p>
+    <ul>
+        <li>同じ内容で両方に依頼し、2つの初稿を取得する</li>
+    </ul>
+
+    <p>2. <strong>依頼テンプレート</strong></p>
+    <pre>
+以下の内容で、要件定義書・アーキテクチャ・技術スタックを
+作成してください。
+
+【前提条件】
+1. AI駆動開発で進めます（Claude Opus 4.5/Cursorを使用）
+2. 開発者は非エンジニアです
+3. 非エンジニアでも理解できるように分かりやすく説明してください
+4. 各項目には「なぜそうするのか」の理由も記載してください
+
+【開発したいもの】
+（ここにアイデアを記載）
+
+【作成してほしいもの】
+1. 要件定義書
+   - 機能一覧（優先度付き）
+   - 画面一覧
+   - ユーザーの操作フロー
+
+2. アーキテクチャ
+   - システム構成図（図解で）
+   - データの流れ
+   - 使用するサービス/ツール
+
+3. 技術スタック
+   - 使用技術と選定理由
+   - 各技術のバージョン
+   - 初級者でも扱いやすいか</pre>
+
+    <p>3. <strong>結果を保存</strong></p>
+    <ul>
+        <li>Perplexityからの回答 → <code>要件定義_初稿_Perplexity.md</code></li>
+        <li>Grokからの回答 → <code>要件定義_初稿_Grok.md</code></li>
+    </ul>
+
+    <div class="alert alert-tip">
+        <strong>💡 2つのAIで比較するメリット</strong>
+        <ul>
+            <li>片方では見落としている観点を補完できる</li>
+            <li>どちらがいいか、第3の選択肢があるかを後で検討できる</li>
+            <li>最初の粗をなくせる</li>
+        </ul>
+    </div>
+
+    <hr>
+
+    <h2>フェーズ3️⃣ マージ・レビュー</h2>
+
+    <h3>目的</h3>
+    <p>2つの初稿を比較・統合し、より良い要件定義を作成する</p>
+
+    <h3>推奨AI</h3>
+    <ul>
+        <li><strong>Claude Opus 4.5</strong></li>
+    </ul>
+
+    <h3>手順</h3>
+    <p>1. <strong>2つの初稿をClaudeに渡してマージ</strong></p>
+    <pre>
+以下の2つの要件定義をチェックして、レビューしてください。
+
+【前提条件】
+- 開発者は非エンジニアです
+- AI駆動開発で進めます
+
+【確認ポイント】
+- 2つの要件定義の違いは何か
+- どちらの方が良いか、または第3の選択肢はあるか
+- 要件に抜け漏れがないか
+- 矛盾している箇所がないか
+- 非エンジニアにも理解できる表現か
+- 実装上の問題点がないか
+- 技術選定は適切か
+
+【要件定義1（Perplexity）】
+（ここに内容を貼り付け）
+
+【要件定義2（Grok）】
+（ここに内容を貼り付け）</pre>
+
+    <p>2. <strong>レビュー後のフロー</strong></p>
+    <pre>
+レビュー実施 → 問題点あり？
+                 ├─ Yes → 壁打ちで解決 → 再レビュー（ループ）
+                 └─ No  → フェーズ4へ</pre>
+
+    <div class="alert alert-important">
+        <strong>⚠️ 壁打ちをしっかり行う</strong>
+        <ul>
+            <li>「ここ要件違ってるけど、どっちがいいの？」と質問</li>
+            <li>「こっちの方がいいですよ」「第3の選択肢がありますよ」などの回答を得る</li>
+            <li>この段階で粗をしっかり潰しておく</li>
+        </ul>
+    </div>
+
+    <hr>
+
+    <h2>フェーズ4️⃣ 清書ファイル作成</h2>
+
+    <h3>目的</h3>
+    <p>実装に入る前に、完全な設計書として3つのファイルを作成する<br>
+        <i>※3つを1ファイルにまとめることも可能ですが、ファイルを分けておくと後で見直しやすく、AIへの指示時にも必要な部分だけ渡せて便利です</i>
+    </p>
+
+    <h3>推奨AI</h3>
+    <ul>
+        <li><strong>Claude Opus 4.5</strong></li>
+    </ul>
+
+    <h3>作成する.mdファイル</h3>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ファイル名</th>
+                <th>内容</th>
+                <th>保存先</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>02_要件定義書.md</code></td>
+                <td>機能要件・非機能要件の最終版</td>
+                <td><code>docs/</code></td>
+            </tr>
+            <tr>
+                <td><code>03_アーキテクチャ.md</code></td>
+                <td>システム構成・データフロー図</td>
+                <td><code>docs/</code></td>
+            </tr>
+            <tr>
+                <td><code>04_技術スタック.md</code></td>
+                <td>使用技術・ライブラリ・バージョン</td>
+                <td><code>docs/</code></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>依頼テンプレート</h3>
+    <pre>
+レビュー結果を反映し、以下の3つの清書ファイルを
+マークダウン形式で作成してください。
+
+【レビューでの指摘事項】
+（ここにレビュー結果を貼り付け）
+
+【作成するファイル】
+1. 02_要件定義書.md
+2. 03_アーキテクチャ.md  
+3. 04_技術スタック.md
+
+【条件】
+- 実装に必要な情報がすべて含まれていること
+- マークダウン形式で整形されていること
+- 非エンジニアにも分かりやすい表現で
+- 指摘事項がすべて反映されていること
+- 各ファイルは独立して読んでも理解できるように
+- 完全に実装が可能な状態にすること</pre>
+
+    <hr>
+
+    <h2>フェーズ5️⃣ 実装計画書作成</h2>
+
+    <h3>目的</h3>
+    <p>タスクを細分化し、段階的に実装を進められるようにする</p>
+
+    <h3>推奨AI</h3>
+    <ul>
+        <li><strong>Claude Opus 4.5</strong></li>
+    </ul>
+
+    <h3>手順</h3>
+    <p>1. <strong>実装計画書の作成依頼</strong></p>
+    <pre>
+清書した3つのファイルを元に、実装計画書を作成してください。
+
+【前提条件】
+- 開発者は非エンジニア
+- AI駆動開発（Claude Opus 4.5/Cursor）で実装
+- 1タスク = AIに1回で依頼できる単位
+
+【要件】
+- フェーズごとにタスクを分割
+- 各タスクは具体的で小さな単位に（15〜30分で完了できる粒度）
+- 依存関係を明確に（どのタスクが先か）
+- 各タスクにチェックボックス付き ← 重要！
+- 各タスクに「AIへの依頼文の例」を記載
+
+【フェーズ構成例】
+- フェーズ0: 環境構築・事前テスト
+- フェーズ1: 基本機能実装
+- フェーズ2: 画面実装
+- フェーズ3: データ連携
+- フェーズ4: テスト・調整
+- フェーズ5: デプロイ</pre>
+
+    <p>2. <strong>計画書の構成例</strong></p>
+    <pre>
+# 実装計画書
+
+## フェーズ0: 環境構築（所要時間：30分）
+- [ ] タスク0-1: プロジェクトフォルダの作成
+      依頼例：「○○というプロジェクトフォルダを作成し、
+              基本的なファイル構成をセットアップしてください」
+- [ ] タスク0-2: 必要なライブラリのインストール
+
+## フェーズ1: 基本機能実装（所要時間：2時間）
+- [ ] タスク1-1: ○○機能の実装
+- [ ] タスク1-2: ○○機能の実装</pre>
+
+    <div class="alert alert-important">
+        <strong>⚠️ チェックボックスは必ずつける</strong>
+        <ul>
+            <li>進捗が一目でわかる</li>
+            <li>日またぎで開発する時、どこまでやったか確認できる</li>
+            <li>AIにも「ここまでやった」と伝えやすい</li>
+        </ul>
+    </div>
+
+    <hr>
+
+    <h2>フェーズ6️⃣ 実装計画書のチェック</h2>
+
+    <h3>目的</h3>
+    <p>計画に抜け漏れがないか最終確認し、成功率を把握する</p>
+
+    <h3>推奨AI</h3>
+    <ul>
+        <li><strong>GPT-5.2-Codex</strong>（レビュー・成功率チェック向け）</li>
+    </ul>
+
+    <div class="alert alert-note">
+        <strong>ℹ️ NOTE</strong>
+        <p>Codexはセキュリティチェックが厳しいので、外部通信（API連携など）がある場合は特に有効。<br>
+            ただし、ガチガチにしすぎると実装が難しくなることもあるのでバランスが大事。</p>
+    </div>
+
+    <h3>手順</h3>
+    <p>1. <strong>チェック依頼</strong></p>
+    <pre>
+以下の3つのファイルを読み込んで内容を確認してください。
+これからこのスクリプトの開発をしていく予定です。
+
+この要件定義・アーキテクチャ・技術スタックでの開発の成功率を
+教えてください。
+
+【確認ポイント】
+- 抜け漏れがないか
+- 詰めが甘い箇所がないか
+- タスクの粒度は適切か（15〜30分で完了できるか）
+- 依存関係に問題はないか
+- AI駆動開発で実行可能か
+- 各タスクの「依頼例」は適切か
+- セキュリティ上の懸念はないか（API制限、アプリパスワードの必要性等）
+
+【出力形式】
+- 成功率（パーセント）と根拠
+- 主要リスク
+- 問題点と改善案を列挙
+- 修正後の実装計画書を出力
+
+【要件定義書】
+（コピペ）
+【アーキテクチャ】
+（コピペ）
+【技術スタック】
+（コピペ）
+【実装計画書】
+（コピペ）</pre>
+
+    <p>2. <strong>成功率の目安</strong></p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>成功率</th>
+                <th>判断</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>85%以上</td>
+                <td>安心して進められる</td>
+            </tr>
+            <tr>
+                <td>70〜84%</td>
+                <td>注意点を確認して進める</td>
+            </tr>
+            <tr>
+                <td>70%未満</td>
+                <td>計画を見直す</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p>3. <strong>最終確認項目</strong></p>
+    <ul>
+        <li>[ ] 全タスクにチェックボックスがついているか</li>
+        <li>[ ] 各タスクに所要時間の目安があるか</li>
+        <li>[ ] 依存関係が明確か</li>
+        <li>[ ] AIへの依頼例が具体的か</li>
+        <li>[ ] 成功率が85%前後あるか</li>
+    </ul>
+
+    <hr>
+
+    <h2>フェーズ7️⃣ 実装</h2>
+
+    <h3>目的</h3>
+    <p>実装計画書に沿って、AIと一緒にコードを書く</p>
+
+    <h3>推奨AIツール</h3>
+
+    <table>
+        <thead>
+            <tr>
+                <th>実装ツール</th>
+                <th>特徴</th>
+                <th>使い分け</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Claude Code（ローカル）</strong></td>
+                <td>ローカルで実行、対話しながら開発</td>
+                <td>通常の開発作業</td>
+            </tr>
+            <tr>
+                <td><strong>Web版Claude Code</strong></td>
+                <td>ブラウザから実行可能</td>
+                <td>リポジトリ作成後に使用</td>
+            </tr>
+            <tr>
+                <td><strong>GenSpark AI Developer</strong></td>
+                <td>非同期実行可能</td>
+                <td>寝ている間でも実行可能</td>
+            </tr>
+            <tr>
+                <td><strong>Cursor</strong></td>
+                <td>エディタ統合型</td>
+                <td>コード編集しながら開発</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>手順</h3>
+    <p>1. <strong>リポジトリを作成</strong></p>
+    <ul>
+        <li>GitHubでリポジトリを作成（パブリック/プライベート）</li>
+        <li>作成した設計書をプロジェクトに含める</li>
+    </ul>
+
+    <p>2. <strong>タスクごとに実装を依頼</strong></p>
+    <pre>
+【実装依頼テンプレート】
+
+以下のタスクを実装してください。
+
+【タスク】
+（実装計画書のタスクをコピペ）
+
+【関連ファイル】
+- 要件定義書：（関連部分を抜粋）
+- アーキテクチャ：（関連部分を抜粋）
+
+【条件】
+- コードにはコメントを付けて説明してください
+- エラーハンドリングも含めてください</pre>
+
+    <p>3. <strong>実装時のルール</strong></p>
+    <ul>
+        <li>1タスクずつ進める（複数同時にやらない）</li>
+        <li>完了したらチェックボックスにチェック <code>[x]</code></li>
+        <li>動作確認してから次へ進む</li>
+    </ul>
+
+    <p>4. <strong>実装中の確認テンプレート</strong></p>
+    <pre>
+今実装した内容を確認してください。
+
+【確認ポイント】
+- 正しく動作するか
+- 要件を満たしているか
+- 改善点はあるか</pre>
+
+    <hr>
+
+    <h2>フェーズ8️⃣ テスト・検証</h2>
+
+    <h3>目的</h3>
+    <p>実装が正しく動作するか確認し、問題を修正する</p>
+
+    <h3>推奨AI</h3>
+    <ul>
+        <li><strong>GPT-5.2-Codex</strong>（デバッグ向け）</li>
+    </ul>
+
+    <div class="alert alert-note">
+        <strong>ℹ️ NOTE</strong>
+        <p>エラーメッセージの解析と修正案の提示が得意です。</p>
+    </div>
+
+    <h3>手順</h3>
+    <p>1. <strong>テスト依頼テンプレート</strong></p>
+    <pre>
+実装した機能のテストを行ってください。
+
+【テスト対象】
+（テストしたい機能を記載）
+
+【確認項目】
+- 正常系：想定通りの操作で正しく動作するか
+- 異常系：エラー時に適切に処理されるか
+- 境界値：極端な値でも問題ないか
+
+【出力形式】
+- テスト結果一覧（OK/NG）
+- NGの場合は原因と修正方法</pre>
+
+    <p>2. <strong>テストチェックリスト</strong></p>
+    <ul>
+        <li>[ ] 全ての機能が動作するか</li>
+        <li>[ ] エラーメッセージは分かりやすいか</li>
+        <li>[ ] 画面表示は崩れていないか</li>
+        <li>[ ] データは正しく保存されるか</li>
+    </ul>
+
+    <hr>
+
+    <h2>🆘 トラブルシューティング</h2>
+
+    <h3>エラーが発生した時</h3>
+    <pre>
+以下のエラーが発生しました。原因と解決方法を教えてください。
+
+【エラー内容】
+（エラーメッセージをそのままコピペ）
+
+【発生状況】
+- いつ：（どの操作をした時）
+- どこで：（どのファイル/画面で）
+- 何をした：（直前の操作）
+
+【試したこと】
+（すでに試した解決策があれば記載）</pre>
+
+    <h3>行き詰まった時</h3>
+    <pre>
+実装が行き詰まっています。アドバイスをください。
+
+【現状】
+（今どこまで進んでいるか）
+
+【困っていること】
+（具体的に何が分からないか）
+
+【ゴール】
+（最終的に何を実現したいか）</pre>
+
+    <h3>仕切り直しの判断基準</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>状況</th>
+                <th>対応</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1つのタスクで3回以上失敗</td>
+                <td>タスクの粒度を見直す</td>
+            </tr>
+            <tr>
+                <td>根本的な設計ミス発覚</td>
+                <td>フェーズ2（要件定義）に戻る</td>
+            </tr>
+            <tr>
+                <td>技術的に実現困難</td>
+                <td>代替手段を検討、または No Go</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <hr>
+
+    <h2>✅ マスターチェックリスト</h2>
+
+    <div class="checklist-container">
+        <h3>フェーズ1: リサーチ</h3>
+        <div class="checklist-item"><input type="checkbox" class="checklist-box"> Perplexityでリサーチ完了</div>
+        <div class="checklist-item"><input type="checkbox" class="checklist-box"> Grokでリサーチ完了</div>
+        <div class="checklist-item"><input type="checkbox" class="checklist-box"> Go/No Go判断完了</div>
+        <div class="checklist-item"><input type="checkbox" class="checklist-box"> 01_リサーチ結果.md 保存完了</div>
+
+        <h3>フェーズ2: 要件定義（初稿）</h3>
+        <div class="checklist-item"><input type="checkbox" class="checklist-box"> Perplexityで要件定義の初稿を取得</div>
+        <div class="checklist-item"><input type="checkbox" class="checklist-box"> Grokで要件定義の初稿を取得</div>
+        <div class="checklist-item"><input type="checkbox" class="checklist-box"> 2つの初稿を保存</div>
+
+        <h3>フェーズ3: マージ・レビュー</h3>
+        <div class="checklist-item"><input type="checkbox" class="checklist-box"> Claude Opus 4.5で2つの初稿を比較・マージ</div>
+        <div class="checklist-item"><input type="checkbox" class="checklist-box"> 壁打ちで粗を潰した</div>
+        <div class="checklist-item"><input type="checkbox" class="checklist-box"> 重要な指摘事項を解決済み</div>
+
+        <h3>フェーズ4: 清書</h3>
+        <div class="checklist-item"><input type="checkbox" class="checklist-box"> 02_要件定義書.md 作成完了</div>
+        <div class="checklist-item"><input type="checkbox" class="checklist-box"> 03_アーキテクチャ.md 作成完了</div>
+        <div class="checklist-item"><input type="checkbox" class="checklist-box"> 04_技術スタック.md 作成完了</div>
+
+        <h3>フェーズ5: 実装計画</h3>
+        <div class="checklist-item"><input type="checkbox" class="checklist-box"> 05_実装計画書.md 作成完了</div>
+        <div class="checklist-item"><input type="checkbox" class="checklist-box"> 全タスクにチェックボックス付与</div>
+        <div class="checklist-item"><input type="checkbox" class="checklist-box"> 各タスクに依頼例記載</div>
+
+        <h3>フェーズ6: 計画チェック</h3>
+        <div class="checklist-item"><input type="checkbox" class="checklist-box"> GPT-5.2-Codexで計画書のチェック完了</div>
+        <div class="checklist-item"><input type="checkbox" class="checklist-box"> 成功率を確認（目安：85%以上）</div>
+        <div class="checklist-item"><input type="checkbox" class="checklist-box"> 指摘事項の修正完了</div>
+
+        <h3>フェーズ7: 実装</h3>
+        <div class="checklist-item"><input type="checkbox" class="checklist-box"> リポジトリ作成完了</div>
+        <div class="checklist-item"><input type="checkbox" class="checklist-box"> フェーズ0（環境構築）完了</div>
+        <div class="checklist-item"><input type="checkbox" class="checklist-box"> フェーズ1完了</div>
+        <div class="checklist-item"><input type="checkbox" class="checklist-box"> フェーズ2完了</div>
+
+        <h3>フェーズ8: テスト</h3>
+        <div class="checklist-item"><input type="checkbox" class="checklist-box"> 全機能のテスト完了</div>
+        <div class="checklist-item"><input type="checkbox" class="checklist-box"> バグ修正完了</div>
+        <div class="checklist-item"><input type="checkbox" class="checklist-box"> 最終動作確認完了</div>
+    </div>
+
+    <hr>
+
+    <h2>💡 Tips</h2>
+
+    <div class="alert alert-tip">
+        <strong>💡 AIへの指示のコツ</strong>
+        <ul>
+            <li>「いい感じに」「適当に」は使わない → 具体的に指示する</li>
+            <li>前提条件は毎回伝える（AIは前の会話を忘れることがある）</li>
+            <li>成果物の形式を指定する（マークダウン、JSON等）</li>
+            <li>長い依頼は箇条書きで整理する</li>
+        </ul>
+    </div>
+
+    <div class="alert alert-tip">
+        <strong>💡 2つのAIで比較するメリット</strong>
+        <ul>
+            <li>回答をマージ（結合）することで抜け漏れを防げる</li>
+            <li>ここはこうですよ、という差分を抽出できる</li>
+            <li>「どっちがいい？」「第3の選択肢は？」と壁打ちできる</li>
+        </ul>
+    </div>
+
+    <div class="alert alert-tip">
+        <strong>💡 チェックボックスの活用</strong>
+        <ul>
+            <li>進捗が一目でわかる</li>
+            <li>日またぎの開発でも、どこまでやったか把握できる</li>
+            <li>AIにも進捗を伝えやすい</li>
+        </ul>
+    </div>
+
+    <div class="alert alert-tip">
+        <strong>💡 効率アップのコツ</strong>
+        <ul>
+            <li>関連ドキュメントはプロジェクトフォルダにまとめる</li>
+            <li>AIとの会話ログも保存しておく</li>
+            <li>うまくいった依頼文はテンプレートとして再利用</li>
+            <li>音声入力を活用すると入力が楽になる</li>
+        </ul>
+    </div>
+
+    <div class="alert alert-important">
+        <strong>⚠️ 必ず守ること</strong>
+        <ul>
+            <li>各フェーズを飛ばさない</li>
+            <li>2つのAIで比較・マージを行う</li>
+            <li>レビューは必ず実施する</li>
+            <li>不明点はAIに質問する</li>
+            <li>1タスクずつ確実に進める</li>
+        </ul>
+    </div>
+
+    <div class="alert alert-caution">
+        <strong>⚠️ 避けるべきこと</strong>
+        <ul>
+            <li>複数タスクを一度に依頼しない</li>
+            <li>エラーを無視して先に進まない</li>
+            <li>ドキュメントなしで実装を始めない</li>
+            <li>Codexのセキュリティチェックでガチガチにしすぎない（バランスが大事）</li>
+        </ul>
+    </div>
+
+    <hr>
+
+    <h2>📚 参考：AIへの依頼文サンプル集</h2>
+
+    <h3>リサーチ時</h3>
+    <pre>
+○○を開発したいのですが、以下を教えてください。
+1. 技術的に実現可能か
+2. 必要な技術スタック
+3. 開発期間の目安
+4. 非エンジニアがAI駆動開発で作れるか
+5. 無料でできるか（API料金等）</pre>
+
+    <h3>要件定義時</h3>
+    <pre>
+○○を開発します。以下の形式で要件定義書を作成してください。
+- 機能一覧（優先度：高/中/低）
+- 画面一覧
+- データ項目
+※ 非エンジニア向けに分かりやすく
+※ AI駆動開発（Claude Opus 4.5/Cursor使用）を前提に</pre>
+
+    <h3>マージ・レビュー時</h3>
+    <pre>
+この2つの要件定義を比較して、いいとこ取りで
+統合した要件定義を作成してください。
+違いがある箇所は「こちらの方がいい理由」も教えてください。</pre>
+
+    <h3>実装時</h3>
+    <pre>
+以下の機能を実装してください。
+【機能】○○
+【条件】
+- シンプルに実装
+- コメントを付ける
+- エラー処理も含める</pre>
+
+    <h3>成功率チェック時</h3>
+    <pre>
+この要件定義・アーキテクチャ・技術スタックでの
+開発の成功率を教えてください。
+主要リスクと改善案も教えてください。</pre>
+
+    <h3>デバッグ時</h3>
+    <pre>
+以下のエラーを解決してください。
+【エラー】（エラーメッセージ）
+【コード】（関連コード）
+【期待動作】○○
+【実際動作】××</pre>
+
+    <hr>
+
+    <div style="text-align: center; color: #6b7280; font-size: 0.9em; margin-top: 3em;">
+        <p>最終更新: 2026年1月14日 | バージョン: 2.2</p>
+    </div>
+
+</body>
+
+</html>
